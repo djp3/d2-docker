@@ -1,2 +1,2 @@
 # d2-docker
-the d2 opensimulator distribution provided as a dockerized installation
+This repository is designed.

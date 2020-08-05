@@ -8,7 +8,7 @@ We begin with a machine running Ubuntu 20.04 server edition.
 `sudo apt install aptitude`
 
 First step is to install docker.  Docker is a whole world.  You can learn about
-it starting here: [Docker Get Started][https://docs.docker.com/get-started/].
+it starting here: [Docker Get Started](https://docs.docker.com/get-started/).
 
 `sudo aptitude install docker.io`
 
@@ -48,6 +48,6 @@ You can clean everything up with:
 
 `docker system prune -a`
 
-Now I'm assuming that you have also cloned the [repository][https://github.com/djp3/d2-docker] that contains these instructions.
+Now I'm assuming that you have also cloned the [repository](https://github.com/djp3/d2-docker) that contains these instructions.
 
 

@@ -1,0 +1,91 @@
+version: '3.8'
+
+networks:
+  alpha_network:
+    ipam:
+      driver: default
+      config:
+        # This is to manage mysql login security
+        - subnet: 172.31.0.0/16
+
+volumes:
+  db-volume-opensim:
+    name: db-volume-opensim
+  file-volume-opensim:
+    name: file-volume-opensim
+
+
+services:
+  db:
+    build: mariadb-service
+    networks:
+      - alpha_network
+    ports:
+      - "3306:3306/tcp"
+    volumes:
+      - type: volume
+        source: db-volume-opensim
+        target: /var/lib/mysql
+        volume:
+          nocopy: true
+        consistency: cached
+    environment:
+      - DP_DATABASE_USER
+      - DP_DATABASE_USER_PASSWORD
+      - MYSQL_ROOT_PASSWORD=${DP_DATABASE_ROOT_PASSWORD}
+      - MYSQL_INITDB_SKIP_TZINFO=${DP_INITDB_SKIP_TZINFO}
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - alpha_network
+    ports:
+      - "8080:8080"
+
+  mono:
+    build: mono-service
+    links:
+      - "db:database"
+    networks:
+      - alpha_network
+    volumes:
+      - type: volume
+        source: file-volume-opensim
+        target: /root
+        consistency: delegated
+    ports:
+      - "9000:9000/tcp"
+      - "9000:9000/udp"
+      - "9001:9001/udp"
+      - "9002:9002/udp"
+      - "9003:9003/udp"
+    depends_on:
+      - "db"
+    environment:
+      - DP_EXTERNAL_NETWORK
+      - DP_WORLD_NAME
+      - DP_ESTATE_01_NAME
+      - DP_ESTATE_OWNER_FIRST
+      - DP_ESTATE_OWNER_LAST
+      - DP_ESTATE_OWNER_PASSWORD
+      - DP_ESTATE_OWNER_EMAIL
+      - DP_WIFI_USER_PASSWORD
+      - DP_WIFI_USER_EMAIL
+      - DP_GMAIL_USER
+      - DP_GMAIL_PASSWORD
+      - DP_DATABASE_USER_PASSWORD
+      - DP_DATABASE_ROOT_PASSWORD
+      - DP_DATABASE_HOST
+      - DP_DATABASE
+      - DP_DATABASE_USER
+      - DP_INITDB_SKIP_TZINFO
+      - DP_INSTALL_ON_UNIX
+      - DP_WIFI_USER_FIRST
+      - DP_WIFI_USER_LAST
+      - DP_WIFI_ACCOUNT_STYLE
+      - MYSQL_ROOT_PASSWORD=${DP_DATABASE_ROOT_PASSWORD}
+      - MYSQL_INITDB_SKIP_TZINFO=${DP_INITDB_SKIP_TZINFO}
+              
+
+

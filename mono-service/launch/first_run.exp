@@ -1,0 +1,41 @@
+#!/usr/bin/expect -f
+
+#set force_conservative 1  ;# set to 1 to force conservative mode even if
+			  ;# script wasn't run conservatively originally
+#if {$force_conservative} {
+	set send_slow {1 .1}
+	proc send {ignore arg} {
+		sleep .1
+		exp_send -s -- $arg
+	}
+#}
+
+set timeout -1 
+set stty_init "rows 51 columns 66"
+spawn mono OpenSim.exe
+match_max 100000
+expect -re "New estate name.*: "
+exp_send -- "${DP_ESTATE_01_NAME}\r"
+expect -re "Estate owner first name.*: "
+exp_send -- "${DP_ESTATE_OWNER_FIRST}\r"
+expect -re "Estate owner last name.*: "
+exp_send -- "${DP_ESTATE_OWNER_LAST}\r"
+expect -re "Password: "
+exp_send -- "${DP_ESTATE_OWNER_PASSWORD}\r"
+expect -re "Email: "
+exp_send -- "${DP_ESTATE_OWNER_EMAIL}\r"
+expect -re "User ID ..*-.*-.*-.*-.*.: "
+exp_send -- "\r"
+expect -re "Region (.*) # "
+exp_send -- "\r"
+#trap {exp_send -- "shutdown";expect eof} {SIGTERM}
+#interact {
+#  "shutdown" {
+#    send_user "shutdown";
+#    expect eof
+#  }
+#  -re "."
+#}
+sleep 5
+exp_send -- "shutdown\r"
+expect eof

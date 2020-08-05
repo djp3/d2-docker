@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+#This is an attempt at failing safely if the patterns aren't picked up
+set timeout 20 
+
+spawn mono OpenSim.exe
+match_max 100000
+expect -re "New estate name.*:"
+send -- "${DP_ESTATE_01_NAME}\r"
+expect -re "Estate owner first name.*:"
+send -- "${DP_ESTATE_OWNER_FIRST}\r"
+expect -re "Estate owner last name.*:"
+send -- "${DP_ESTATE_OWNER_LAST}\r"
+expect -re "Password:"
+send -- "${DP_ESTATE_OWNER_PASSWORD}\r"
+expect -re "Email:"
+send -- "${DP_ESTATE_OWNER_EMAIL}\r"
+expect -re "User ID ..*-.*-.*-.*-.*.:"
+send -- "\r"
+#expect -re "Region (.*) #"
+send -- "shutdown\r"
+#expect eof

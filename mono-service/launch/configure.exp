@@ -1,0 +1,37 @@
+#!/usr/bin/expect -f
+#This is an attempt at failing safely if the patterns aren't picked up
+set timeout 20 
+set stty_init "rows 51 columns 66"
+spawn mono Configure.exe
+match_max 100000
+expect -re "Name of your world:.*\x1b.6n"
+send -- "${DP_WORLD_NAME}\r"
+expect -re "MySql database host:.*\x1b.6n"
+send -- "${DP_DATABASE_HOST}\r"
+expect -re "MySql database schema name:.*\x1b.6n"
+send -- "${DP_DATABASE}\r"
+expect -re "MySql database user account:.*\x1b.6n"
+send -- "${DP_DATABASE_USER}\r"
+expect -re "MySql database password for that account:.*\x1b.6n"
+send -- "${DP_DATABASE_USER_PASSWORD}\r"
+expect -re "Your.*\x1b.6n"
+send -- "${DP_EXTERNAL_NETWORK}\r"
+expect -re "Choose 1 or 2.*\x1b.6n"
+send -- "${DP_INSTALL_ON_UNIX}\r"
+expect -re "Wifi Admin first name.*\x1b.6n"
+send -- "${DP_WIFI_USER_FIRST}\r"
+expect -re "Wifi Admin last name.*\x1b.6n"
+send -- "${DP_WIFI_USER_LAST}\r"
+expect -re "Wifi Admin password.*\x1b.6n"
+send -- "${DP_WIFI_USER_PASSWORD}\r"
+expect -re "Wifi Admin email.*\x1b.6n"
+send -- "${DP_WIFI_USER_EMAIL}\r"
+expect -re "User account creation.*\x1b.6n"
+send -- "${DP_WIFI_ACCOUNT_STYLE}\r"
+expect -re "Gmail user name.*\x1b.6n"
+send -- "${DP_GMAIL_USER}\r"
+expect -re "Gmail password.*\x1b.6n"
+send -- "${DP_GMAIL_PASSWORD}\r"
+expect -re "<Press enter to exit>.*\x1b.6n"
+send -- "\r"
+expect eof

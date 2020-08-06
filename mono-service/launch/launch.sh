@@ -24,17 +24,18 @@ if [ $? -eq 0 ]; then
   fi
   if [ ! -f "../../launch/has_first_run.txt" ]; then
   	expect ../../launch/first_run_go.exp
-	touch has_first_run.txt
+	touch ../../launch/has_first_run.txt
   	echo "First run complete"
   fi
 
-  expect ../../launch/later_run_go.exp &
-  child=$!
+  #expect ../../launch/later_run_go.exp &
+  #child=$!
   #This enables us to pass on SIGTERM to expect
-  wait "$child"
+  #wait "$child"
 
   echo "OpenSim	run complete"
   echo "Launch script complete"
+  tail -f /dev/null
   exit 0
 else
   echo "Database did not spin up in 60 seconds"

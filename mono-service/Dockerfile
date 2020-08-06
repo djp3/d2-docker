@@ -41,11 +41,27 @@ RUN mono-csc check-mono/hello.cs
 RUN mono check-mono/hello.exe
 RUN csharp -e 'new System.Net.WebClient ().DownloadString ("https://www.nuget.org")' >> /dev/null
 
+
 #Get ready to load and configure opensim
 #RUN wget -q "http://metaverseink.com/download/diva-r09110.zip"
 COPY "diva-r09110.zip" "diva-r09110.zip"
 RUN unzip -q diva-r09110.zip 
-WORKDIR /root/diva-r09110/bin
+
+#Download (or COPY) universal campus
+COPY universal-campus /root/universal-campus
+WORKDIR /root/universal-campus
+#RUN wget -q -O universal_campus_01_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_01_0.7.3_03022012.oar 
+COPY "universal-campus/universal_campus_01_0.7.3_03022012.oar" "universal_campus_01_0.7.3_03022012.oar"
+#RUN wget -q -O universal_campus_02_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_02_0.7.3_03022012.oar
+COPY "universal-campus/universal_campus_02_0.7.3_03022012.oar" "universal_campus_02_0.7.3_03022012.oar"
+#RUN wget -q -O universal_campus_03_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_03_0.7.3_03022012.oar
+COPY "universal-campus/universal_campus_03_0.7.3_03022012.oar" "universal_campus_03_0.7.3_03022012.oar"
+#RUN wget -q -O universal_campus_04_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_04_0.7.3_03022012.oar
+COPY "universal-campus/universal_campus_04_0.7.3_03022012.oar" "universal_campus_04_0.7.3_03022012.oar"
+
+COPY "universal-campus/OSAvatarsSpring2011.iar" "OSAvatarsSpring2011.iar"
+RUN cp *.oar /root/diva-r09110/bin
+RUN cp *.iar /root/diva-r09110/bin/Library
 
 #Set up for launching
 COPY launch /root/launch
@@ -55,7 +71,6 @@ EXPOSE 9000/udp
 EXPOSE 9001/udp
 EXPOSE 9002/udp
 EXPOSE 9003/udp
-
 
 WORKDIR /root/launch
 CMD ["/root/launch/launch.sh"]

@@ -120,7 +120,8 @@ From the root directory that contains the docker-compose.yml file run:
 `docker-compose build --no-cache`
 
 This will take several minutes as all the software is downloaded tested and
-built.
+built. Roughly what it is doing is following the instructions for the diva/d2
+installation located [here](https://github.com/diva/d2/wiki/Installation)
 
 	   
 

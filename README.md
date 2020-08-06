@@ -5,7 +5,7 @@ configuration work.
 ## First things
 We begin with a machine running Ubuntu 20.04 server edition.
 
-`sudo apt install aptitude`
+`sudo apt install aptitude curl`
 
 First step is to install docker.  Docker is a whole world.  You can learn about
 it starting here: [Docker Get Started](https://docs.docker.com/get-started/).
@@ -47,6 +47,23 @@ You can see all the images that you just created with
 You can clean everything up with:
 
 `docker system prune -a`
+
+Now [install docker-compose](https://docs.docker.com/compose/install/)
+
+`sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
+
+`sudo chmod +x /usr/local/bin/docker-compose`
+
+if it works then:
+
+`docker-compose --version`
+
+should yield something like
+
+*docker-compose version 1.26.2, build eefe0d31*
+
+More info on docker-compose can be found [here](https://docs.docker.com/compose/gettingstarted/)
+
 
 Now I'm assuming that you have also cloned the [repository](https://github.com/djp3/d2-docker) that contains these instructions.
 
@@ -95,6 +112,15 @@ There are a handful of accounts:
 	1. Probably an actual user named DP_ESTATE_OWNER_FIRST DP_ESTATE_OWNER_LAST
 	2. with password set by DP_ESTATE_OWNER_PASSWORD
 	3. and email set by DP_ESTATE_OWNER_EMAIL
+
+## Build the world
+
+From the root directory that contains the docker-compose.yml file run:
+
+`docker-compose build --no-cache`
+
+This will take several minutes as all the software is downloaded tested and
+built.
 
 	   
 

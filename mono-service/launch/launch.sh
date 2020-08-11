@@ -21,11 +21,15 @@ if [ $? -eq 0 ]; then
   	expect ../../launch/configure_go.exp
 	touch ../../launch/is_configured.txt
   	echo "Configured world"
+  else
+  	echo "World was already configured"
   fi
   if [ ! -f "../../launch/has_first_run.txt" ]; then
   	expect ../../launch/first_run_go.exp
 	touch ../../launch/has_first_run.txt
   	echo "First run complete"
+  else
+  	echo "First run already complete"
   fi
 
   #expect ../../launch/later_run_go.exp &

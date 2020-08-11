@@ -51,15 +51,15 @@ RUN unzip -q diva-r09110.zip
 COPY universal-campus /root/universal-campus
 WORKDIR /root/universal-campus
 #RUN wget -q -O universal_campus_01_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_01_0.7.3_03022012.oar 
-COPY "universal-campus/universal_campus_01_0.7.3_03022012.oar" "universal_campus_01_0.7.3_03022012.oar"
+#COPY "universal-campus/universal_campus_01_0.7.3_03022012.oar" "universal_campus_01_0.7.3_03022012.oar"
 #RUN wget -q -O universal_campus_02_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_02_0.7.3_03022012.oar
-COPY "universal-campus/universal_campus_02_0.7.3_03022012.oar" "universal_campus_02_0.7.3_03022012.oar"
+#COPY "universal-campus/universal_campus_02_0.7.3_03022012.oar" "universal_campus_02_0.7.3_03022012.oar"
 #RUN wget -q -O universal_campus_03_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_03_0.7.3_03022012.oar
-COPY "universal-campus/universal_campus_03_0.7.3_03022012.oar" "universal_campus_03_0.7.3_03022012.oar"
+#COPY "universal-campus/universal_campus_03_0.7.3_03022012.oar" "universal_campus_03_0.7.3_03022012.oar"
 #RUN wget -q -O universal_campus_04_0.7.3_03022012.oar http://uc.onikenkon.com/counter1/link_counter.php?url=../universal_campus_04_0.7.3_03022012.oar
-COPY "universal-campus/universal_campus_04_0.7.3_03022012.oar" "universal_campus_04_0.7.3_03022012.oar"
+#COPY "universal-campus/universal_campus_04_0.7.3_03022012.oar" "universal_campus_04_0.7.3_03022012.oar"
 
-COPY "universal-campus/OSAvatarsSpring2011.iar" "OSAvatarsSpring2011.iar"
+#COPY "universal-campus/OSAvatarsSpring2011.iar" "OSAvatarsSpring2011.iar"
 RUN cp *.oar /root/diva-r09110/bin
 RUN cp *.iar /root/diva-r09110/bin/Library
 

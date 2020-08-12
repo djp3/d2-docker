@@ -17,7 +17,10 @@ volumes:
 
 services:
   db:
-    build: mariadb-service
+    build: 
+      context: mariadb-service
+      args:
+        - TZ=${DP_TIME_ZONE}
     networks:
       - alpha_network
     ports:
@@ -30,9 +33,9 @@ services:
           nocopy: true
         consistency: cached
     environment:
+      - TZ=${DP_TIME_ZONE}
       - DP_DATABASE_USER
       - DP_DATABASE_USER_PASSWORD
-      - TZ=${DP_TIME_ZONE}
       - MYSQL_ROOT_PASSWORD=${DP_DATABASE_ROOT_PASSWORD}
       - MYSQL_INITDB_SKIP_TZINFO=${DP_INITDB_SKIP_TZINFO}
 
@@ -43,9 +46,14 @@ services:
       - alpha_network
     ports:
       - "8080:8080"
+    environment:
+      - TZ=${DP_TIME_ZONE}
 
   mono:
-    build: mono-service
+    build: 
+      context: mono-service
+      args:
+        - TZ=${DP_TIME_ZONE}
     links:
       - "db:database"
     networks:
@@ -85,6 +93,7 @@ services:
       - DP_WIFI_USER_FIRST
       - DP_WIFI_USER_LAST
       - DP_WIFI_ACCOUNT_STYLE
+      - TZ=${DP_TIME_ZONE}
       - MYSQL_ROOT_PASSWORD=${DP_DATABASE_ROOT_PASSWORD}
       - MYSQL_INITDB_SKIP_TZINFO=${DP_INITDB_SKIP_TZINFO}
               

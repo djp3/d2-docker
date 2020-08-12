@@ -1,18 +1,37 @@
 FROM ubuntu
 
-WORKDIR /root
+ARG DP_WORLD_NAME
+ARG DP_DATABASE_HOST
+ARG DP_DATABASE
+ARG DP_DATABASE_USER
+ARG DP_DATABASE_USER_PASSWORD
+ARG DP_EXTERNAL_NETWORK
+ARG DP_INSTALL_ON_UNIX
+ARG DP_WIFI_USER_FIRST
+ARG DP_WIFI_USER_LAST
+ARG DP_WIFI_USER_PASSWORD
+ARG DP_WIFI_USER_EMAIL
+ARG DP_WIFI_ACCOUNT_STYLE
+ARG DP_GMAIL_USER
+ARG DP_GMAIL_PASSWORD
 
 #Reduce error messages on docker build
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+ARG DEBIAN_FRONTEND=noninteractive
 
-###################################
-#Set up the repository to load mono
-# See here https://www.mono-project.com/download/stable/#download-lin
-#Allow packages to be found
+#Allow new packages to be found
 RUN apt-get update -qq
+
 #Reduce error messages on docker build and upgrade
 RUN apt-get install apt-utils -qq
 
+#Configure timezone
+ARG TZ
+RUN apt-get install tzdata -qq
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
+RUN echo ${TZ} > /etc/timezone
+RUN dpkg-reconfigure tzdata
+
+#Upgrade packages if necessary
 RUN apt-get upgrade -qq
 
 #Utilities needed for docker installation to work 
@@ -23,17 +42,28 @@ RUN apt-get install gettext-base expect wget unzip wait-for-it -qq
 #Utilities djp3 needs temporarily in the image for debugging this Dockerfile 
 RUN apt-get install vim tree -qq
 
+###################################
+#Set up the repository to load mono
+# See here https://www.mono-project.com/download/stable/#download-lin
+
 #Things needed for key management
 RUN apt-get install gnupg ca-certificates -qq
 
 #Key needed to install mono 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+#RUN echo "deb https://download.mono-project.com/repo/ubuntu nightly-focal main" | tee /etc/apt/sources.list.d/mono-official-nightly.list
+#RUN echo "deb https://download.mono-project.com/repo/ubuntu preview-focal main" | tee /etc/apt/sources.list.d/mono-official-preview.list
+
+#Get the info about mono packages
+RUN apt-get update -qq
 
 #Install mono with https ability
 RUN apt-get install mono-devel ca-certificates-mono -qq
+#RUN apt-get install mono-complete ca-certificates-mono -qq
 
 #Verify mono
+WORKDIR /root
 COPY check-mono /root/check-mono 
 RUN mono --version
 RUN yes | certmgr -ssl smtps://smtp.gmail.com:465
@@ -62,9 +92,12 @@ WORKDIR /root/universal-campus
 #COPY "universal-campus/OSAvatarsSpring2011.iar" "OSAvatarsSpring2011.iar"
 RUN cp *.oar /root/diva-r09110/bin
 RUN cp *.iar /root/diva-r09110/bin/Library
+#COPY "universal-campus/OSAvatarsSpring2011.iar" "OSAvatarsSpring2011.iar"
 
-#Set up for launching
+#Set up for launching opensim configuration
 COPY launch /root/launch
+
+WORKDIR /root/launch
 
 EXPOSE 9000/tcp
 EXPOSE 9000/udp
@@ -72,7 +105,6 @@ EXPOSE 9001/udp
 EXPOSE 9002/udp
 EXPOSE 9003/udp
 
-WORKDIR /root/launch
 CMD ["/root/launch/launch.sh"]
 #Just keep the container running for now
 #CMD tail -f /dev/null

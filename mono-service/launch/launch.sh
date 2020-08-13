@@ -30,11 +30,17 @@ if [ $? -eq 0 ]; then
   	echo "World was already configured"
   fi
   if [ ! -f "../../launch/has_first_run.txt" ]; then
-  	expect ../../launch/first_run_go.exp
+	if [ $DP_UNIVERSAL_CAMPUS = "true" ]; then
+  	  expect ../../launch/first_run_with_Universal_Campus_go.exp
+  	  echo "First run installed Universal Campus"
+	else
+  	  expect ../../launch/first_run_go.exp
+  	  echo "First run did not install Universal Campus"
+	fi
 	touch ../../launch/has_first_run.txt
   	echo "First run complete"
   else
-  	echo "First run already complete"
+  	echo "First run unnecessary - already complete"
   fi
 
   #expect ../../launch/later_run_go.exp &

@@ -20,19 +20,26 @@ if [ $? -eq 0 ]; then
   if [ ! -f "../../launch/is_configured.txt" ]; then
   	expect ../../launch/configure_go.exp
 	touch ../../launch/is_configured.txt
-    for i in {00..10};do echo ;done
+
+	# Add custom set up
+	echo ";; djp3:  Changes from DivaPrefences.ini" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	echo "[DataSnapshot]" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	echo "    DATA_SRV_MISearch=\"\"" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	echo "" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	echo "[XEngine]" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	echo "    AppDomainLoading = false" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	echo "" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	echo "    ThreadStackSize = 524288" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+
   	echo "Configured world"
   else
-    for i in {00..10};do echo ;done
   	echo "World was already configured"
   fi
   if [ ! -f "../../launch/has_first_run.txt" ]; then
   	expect ../../launch/first_run_go.exp
 	touch ../../launch/has_first_run.txt
-    for i in {00..10};do echo ;done
   	echo "First run complete"
   else
-    for i in {00..10};do echo ;done
   	echo "First run already complete"
   fi
 
@@ -40,7 +47,7 @@ if [ $? -eq 0 ]; then
   #child=$!
   #This enables us to pass on SIGTERM to expect
   #wait "$child"
-  for i in {00..10};do echo ;done
+
   echo "OpenSim	run complete"
   echo "Launch script complete"
   tail -f /dev/null

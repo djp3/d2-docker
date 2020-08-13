@@ -1,3 +1,4 @@
 *.swp
 .env
 customize.env
+mono-service/launch/VivoxAddendum.txt

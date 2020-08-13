@@ -2,6 +2,29 @@
 This repository is designed to set up an OpenSimulator world with very little
 configuration work.
 
+# tl;dr
+### first time startup
+1. Clone the repo
+2. Edit .env
+3. `docker-compose build` (maybe 10 min on the first run.)
+4. `docker-compose up` (maybe 5 min without UC, 20 min with UC)
+5. `docker exec -it <mono_docker_image> bash`
+  1. `cd diva-r09110/bin`
+  2. `mono OpenSim.exe` (this remains running while the world is up)
+6. connect with client viewer (e.g., Firestorm)
+
+### shutdown
+1. in the `mono OpenSim.exe` process `shutdown`
+2. `docker-compose down`
+
+### subsequent runs
+1. `docker-compose up`
+2. `docker exec -it <mono_docker_image> bash`
+  1. `cd diva-r09110/bin`
+  2. `mono OpenSim.exe` (this remains running while the world is up)
+3. connect with client viewer
+
+# Not tl;dr
 ## First things
 We begin with a machine running Ubuntu 20.04 server edition.
 

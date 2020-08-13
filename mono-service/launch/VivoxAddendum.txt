@@ -1,3 +1,6 @@
+
+;; Custom set up added by djp3 to adjust from from DivaPrefences.ini
 [VivoxVoice]
 
    enabled = false
+

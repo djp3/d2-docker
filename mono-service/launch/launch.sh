@@ -22,14 +22,8 @@ if [ $? -eq 0 ]; then
 	touch ../../launch/is_configured.txt
 
 	# Add custom set up
-	echo ";; djp3:  Changes from DivaPrefences.ini" >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	echo "[DataSnapshot]" >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	echo "    DATA_SRV_MISearch=\"\"" >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	echo "" >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	echo "[XEngine]" >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	echo "    AppDomainLoading = false" >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	echo "" >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	echo "    ThreadStackSize = 524288" >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	cat MyWorldAddendum.txt >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	cat VivoxAddendum.txt >> /root/diva-r09110/bin/config-include/MyWorld.ini
 
   	echo "Configured world"
   else

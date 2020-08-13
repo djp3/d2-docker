@@ -1,6 +1,5 @@
 
-# Add custom set up
-;; djp3:  Changes from DivaPrefences.ini
+;; Custom set up added by djp3 to adjust from from DivaPrefences.ini
 [DataSnapshot]
     DATA_SRV_MISearch=""
 
@@ -8,3 +7,4 @@
     AppDomainLoading = false
 
     ;;ThreadStackSize = 524288
+

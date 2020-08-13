@@ -1,0 +1,10 @@
+
+# Add custom set up
+;; djp3:  Changes from DivaPrefences.ini
+[DataSnapshot]
+    DATA_SRV_MISearch=""
+
+[XEngine]
+    AppDomainLoading = false
+
+    ;;ThreadStackSize = 524288

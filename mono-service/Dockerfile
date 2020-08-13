@@ -82,7 +82,7 @@ RUN cp *.iar /root/diva-r09110/bin/Library
 #Set up for launching opensim configuration
 COPY launch /root/launch
 
-WORKDIR /root/launch
+WORKDIR /root/diva-r09110/bin
 
 EXPOSE 9000/tcp
 EXPOSE 9000/udp

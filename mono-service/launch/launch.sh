@@ -8,36 +8,36 @@ _term() {
 trap _term SIGTERM
 
 #Set up the scripts 
-cat configure.exp | envsubst > configure_go.exp
-cat first_run.exp | envsubst > first_run_go.exp
-cat first_run_with_Universal_Campus.exp | envsubst > first_run_with_Universal_Campus_go.exp
+cat /root/launch/configure.exp | envsubst > /root/launch/configure_go.exp
+cat /root/launch/first_run.exp | envsubst > /root/launch/first_run_go.exp
+cat /root/launch/first_run_with_Universal_Campus.exp | envsubst > /root/launch/first_run_with_Universal_Campus_go.exp
 
 #Wait for the database to come up
 wait-for-it -q db:3306 -t 60 
 
 if [ $? -eq 0 ]; then
   cd /root/diva-r09110/bin
-  if [ ! -f "../../launch/is_configured.txt" ]; then
-  	expect ../../launch/configure_go.exp
-	touch ../../launch/is_configured.txt
+  if [ ! -f "/root/launch/is_configured.txt" ]; then
+  	expect /root/launch/configure_go.exp
+	touch /root/launch/is_configured.txt
 
 	# Add custom set up
-	cat MyWorldAddendum.txt >> /root/diva-r09110/bin/config-include/MyWorld.ini
-	cat VivoxAddendum.txt >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	cat /root/launch/MyWorldAddendum.txt >> /root/diva-r09110/bin/config-include/MyWorld.ini
+	cat /root/launch/VivoxAddendum.txt >> /root/diva-r09110/bin/config-include/MyWorld.ini
 
   	echo "Configured world"
   else
   	echo "World was already configured"
   fi
-  if [ ! -f "../../launch/has_first_run.txt" ]; then
+  if [ ! -f "/root/launch/has_first_run.txt" ]; then
 	if [ $DP_UNIVERSAL_CAMPUS = "true" ]; then
-  	  expect ../../launch/first_run_with_Universal_Campus_go.exp
+  	  expect /root/launch/first_run_with_Universal_Campus_go.exp
   	  echo "First run installed Universal Campus"
 	else
-  	  expect ../../launch/first_run_go.exp
+  	  expect /root/launch/first_run_go.exp
   	  echo "First run did not install Universal Campus"
 	fi
-	touch ../../launch/has_first_run.txt
+	touch /root/launch/has_first_run.txt
   	echo "First run complete"
   else
   	echo "First run unnecessary - already complete"

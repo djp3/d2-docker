@@ -149,19 +149,24 @@ installation located [here](https://github.com/diva/d2/wiki/Installation)
 
 # References
 or how I made this stuff work
-## The basics for installing the d2 distribution are [here](https://github.com/diva/d2/wiki/Installation)
-## the d2-distribution is [here](http://metaverseink.com/Downloads.html)
-## information on the account management system called "Wifi" is [here](https://github.com/diva/d2/wiki/Wifi)
-## information on [docker-compose](https://docs.docker.com/compose/gettingstarted/)
-## information on OpenSimulator [inventory archives](http://opensimulator.org/wiki/Inventory_Archives)
-## universal campus instructions parts are outdated, but start [here](http://universalcampus.igb.uci.edu/)
-## last updates to universal campus are at [oni kenkon creations](http://uc.onikenkon.com/)
-### how to change the flags in universal campus [instructoins](http://uc.onikenkon.com/instruction_manual_v1.2.pdf)
-## Hints on how to load Universal Campus in latest OpenSim are [here](http://www.metaverseink.com/blog/d2/new-in-0-8-profiles-and-variable-sized-regions/)
+## d2
+1. The basics for installing the d2 distribution are [here](https://github.com/diva/d2/wiki/Installation)
+2. the d2-distribution is [here](http://metaverseink.com/Downloads.html)
+3. information on the account management system called "Wifi" is [here](https://github.com/diva/d2/wiki/Wifi)
+## docker stuff
+1. information on [docker-compose](https://docs.docker.com/compose/gettingstarted/)
+## Open simulator
+1. information on OpenSimulator [inventory archives](http://opensimulator.org/wiki/Inventory_Archives)
+## Universal Campus
+1. universal campus instructions parts are outdated, but start [here](http://universalcampus.igb.uci.edu/)
+2. last updates to universal campus are at [oni kenkon creations](http://uc.onikenkon.com/)
+  1. how to change the flags in universal campus [instructoins](http://uc.onikenkon.com/instruction_manual_v1.2.pdf)
+3. Hints on how to load Universal Campus in latest OpenSim are [here](http://www.metaverseink.com/blog/d2/new-in-0-8-profiles-and-variable-sized-regions/)
 
 
 # Resources
-## opensim models from [outworldz] (https://www.outworldz.com/)
+## opensim models
+1. from [outworldz] (https://www.outworldz.com/)
 
 	   
 

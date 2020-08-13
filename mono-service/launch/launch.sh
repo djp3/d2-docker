@@ -10,7 +10,7 @@ trap _term SIGTERM
 #Set up the scripts 
 cat configure.exp | envsubst > configure_go.exp
 cat first_run.exp | envsubst > first_run_go.exp
-#cat later_run.exp | envsubst > later_run_go.exp
+cat first_run_with_Universal_Campus.exp | envsubst > first_run_with_Universal_Campus_go.exp
 
 #Wait for the database to come up
 wait-for-it -q db:3306 -t 60 

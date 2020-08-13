@@ -2,5 +2,17 @@
 ;; Custom set up added by djp3 to adjust from from DivaPrefences.ini
 [VivoxVoice]
 
-   enabled = false
+   enabled = true
+
+   ; vivox voice server
+   vivox_server = www.osp.vivox.com
+
+   ; vivox SIP URI
+   vivox_sip_uri = osp.vivox.com
+
+   ; vivox admin user name
+   vivox_admin_user = donaniii0973-admin
+
+   ; vivox admin password
+   vivox_admin_password = 5eS00RTk
 

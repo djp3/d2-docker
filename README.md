@@ -9,8 +9,7 @@ configuration work.
 3. `docker-compose build` (maybe 10 min on the first run.)
 4. `docker-compose up` (maybe 5 min without UC, 20 min with UC)
 5. `docker exec -it <mono_docker_image> bash`
-  1. `cd diva-r09110/bin`
-  2. `mono OpenSim.exe` (this remains running while the world is up)
+  1. `mono OpenSim.exe` (this remains running while the world is up)
 6. connect with client viewer (e.g., Firestorm)
 
 ### shutdown
@@ -20,8 +19,7 @@ configuration work.
 ### subsequent runs
 1. `docker-compose up`
 2. `docker exec -it <mono_docker_image> bash`
-  1. `cd diva-r09110/bin`
-  2. `mono OpenSim.exe` (this remains running while the world is up)
+  1. `mono OpenSim.exe` (this remains running while the world is up)
 3. connect with client viewer
 
 # Not tl;dr
@@ -135,6 +133,8 @@ There are a handful of accounts:
 	1. Probably an actual user named DP_ESTATE_OWNER_FIRST DP_ESTATE_OWNER_LAST
 	2. with password set by DP_ESTATE_OWNER_PASSWORD
 	3. and email set by DP_ESTATE_OWNER_EMAIL
+5. Universal Campus
+	1. A beautiful pre built world that makes set up take much longer on the first run, DP_UNIVERSAL_CAMPUS=true
 
 ## Build the world
 
@@ -145,6 +145,46 @@ From the root directory that contains the docker-compose.yml file run:
 This will take several minutes as all the software is downloaded tested and
 built. Roughly what it is doing is following the instructions for the diva/d2
 installation located [here](https://github.com/diva/d2/wiki/Installation)
+The longest part is a bunch of mono precompiling steps.  At the point at which I created the build there were 8 things mono precompiled.  After precompiling there is a test of the mono system ("Hello Mono World")
+
+Then when that is complete, you can do the two-step launch process
+
+Step 1.
+
+`docker-compose up` (maybe 5 min without UC, 20 min with UC)
+
+This launches 3 containers
+1. An admin container for looking at the db ("adminer")
+2. A database container ("db")
+3. The mono container that runs OpenSim ("mono")
+
+This takes a long time (~20 min) on the first run because it has to import the virtual campus.  Also because of the way OpenSim writes to the console, the output is all over the place and hard to read although the time stamps are usually legible.  Running a top process on the host machine will help to see that mono is, in fact, doing something (e.g., flushing the models to the database, compiling in world scripts).  When it is complete you should see `Launch Script Complete` but the container will not release control (intentionally) until the containers are such down.
+
+Step 2.
+
+Now that the system has been initialized you can start it up again such that it is ready to have participants.
+
+You'll need to find the docker container running mono from a different terminal session on the host machine, to do that run:
+
+`docker ps`
+
+And look for the CONTAINER ID that has "mono" in the IMAGE name.  In my list it is the first CONTAINER ID listed.  It will be different each time the containers are spun up, but will look something like "b5568e5afcdf"  Use that ID to start a terminal in the mono container (replace "b5568e5afcdf" with your ID):
+
+`docker exec -it b5568e5afcdf bash`
+
+You should be in /root/diva-r09110/bin directory and can run:
+
+`mono OpenSim.exe` 
+
+First time startup you will have to wait for all the scripts to be started before clients can log in.  At the point that I built this there were 2014 scripts in the Universal Campus to start.  Clients can log in after you have gotten the feedback "LOGINS ENABLED".  This session will leave a prompt open to interact with the administrative interface of the world.
+
+## Shutting down the world
+
+
+## Manage the world
+
+You might want to set the default avatars by gender. Info on that is [here](https://github.com/diva/d2/wiki/Wifi)
+You might want to change the logos in universal Campus.  Info on that is [here](http://uc.onikenkon.com/instruction_manual_v1.2.pdf)
 
 
 # References

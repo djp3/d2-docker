@@ -180,10 +180,19 @@ First time startup you will have to wait for all the scripts to be started befor
 
 ## Shutting down the world
 
+To cleanly shutdown the world without losing the content, you need to first run
+
+`shutdown`
+
+in the OpenSim process
+
+Once that is complete you can `exit` the container and then on the host machine run `docker-compose down` to shut everything down.  Next time you start with `docker-compose up` the system will be brought back up with the existing content and then you can enter the container and run `mono OpenSim.exe` to enable log ins.
+
 
 ## Manage the world
 
 You might want to set the default avatars by gender. Info on that is [here](https://github.com/diva/d2/wiki/Wifi)
+
 You might want to change the logos in universal Campus.  Info on that is [here](http://uc.onikenkon.com/instruction_manual_v1.2.pdf)
 
 

@@ -1,4 +1,5 @@
 *.swp
 .env
+.DS_Store
 customize.env
 mono-service/launch/VivoxAddendum.txt

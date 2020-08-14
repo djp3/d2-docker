@@ -186,7 +186,7 @@ To cleanly shutdown the world without losing the content, you need to first run
 
 in the OpenSim process
 
-Once that is complete you can `exit` the container and then on the host machine run `docker-compose down` to shut everything down.  Next time you start with `docker-compose up` the system will be brought back up with the existing content and then you can enter the container and run `mono OpenSim.exe` to enable log ins.
+Once that is complete you can `exit` the container and then on the host machine run `docker-compose down` to shut everything down.  Next time you start with `docker-compose up` the system will be brought back up with the existing content and then you can enter the container and run `mono OpenSim.exe` to enable log ins.  Subsequent startups should take about 30 seconds until you see "LOGINS ENABLED"
 
 
 ## Manage the world

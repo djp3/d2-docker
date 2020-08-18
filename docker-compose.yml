@@ -49,6 +49,48 @@ services:
     environment:
       - TZ=${DP_TIME_ZONE}
 
+  #To do a backup, make sure only backup container is running
+  #then log in
+  #  Find the container id with
+  #    docker ps
+  #  Attach with
+  #    docker exec -it <container_id> bash
+  #  Install pbzip2
+  #     apt update
+  #     apt install pbzip2
+  #  Backup the db
+  #     cd /root
+  #     tar cv backupdb/ | pbzip2 > backup_storage/backupdb.tar.bz2
+  #  Backup the filesystem
+  #     cd /root
+  #     tar cv backupfile/ | pbzip2 > backup_storage/backupfile.tar.bz2
+  #  Then shutdown the container and move the backups in backup storage
+  #  somewhere safe
+  backup:
+    image: ubuntu
+    volumes:
+      - type: bind
+        source: ./backup_storage
+        target: /root/backup_storage
+        consistency: consistent
+      - type: volume
+        source: file-volume-opensim
+        target: /root/backupfile
+        read_only: true
+        volume:
+          nocopy: true
+        consistency: consistent
+      - type: volume
+        source: db-volume-opensim
+        target: /root/backupdb
+        read_only: true
+        volume:
+          nocopy: true
+        consistency: consistent
+    command: ["tail", "-f", "/dev/null"]
+    environment:
+      - TZ=${DP_TIME_ZONE}
+
   mono:
     build: 
       context: mono-service

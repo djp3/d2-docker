@@ -1,6 +1,6 @@
 # d2-docker
 This repository is designed to set up an OpenSimulator world with very little
-configuration work.
+configuration work.  It is based on the d2 distribution from [here](https://github.com/diva/d2/wiki/Installation).
 
 # tl;dr
 ### first time startup

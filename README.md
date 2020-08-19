@@ -1,6 +1,6 @@
 # d2-docker
 This repository is designed to set up an OpenSimulator world with very little
-configuration work.  It is based on the d2 distribution from [here](https://github.com/diva/d2/wiki/Installation).
+configuration work.  It is based on the d2 distribution from [here](https://github.com/diva/d2/wiki/Installation).  With good ubuntu command-line skills you should be able to get it up and running in 20 minutes... most of which is waiting for mono to build and the world to be imported.
 
 # tl;dr
 ### first time startup

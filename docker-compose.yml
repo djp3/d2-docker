@@ -31,7 +31,7 @@ services:
         target: /var/lib/mysql
         volume:
           nocopy: true
-        consistency: cached
+        consistency: consistent
     environment:
       - TZ=${DP_TIME_ZONE}
       - DP_DATABASE_USER
@@ -126,7 +126,7 @@ services:
       - type: volume
         source: file-volume-opensim
         target: /root
-        consistency: delegated
+        consistency: consistent
     ports:
       - "9000:9000/tcp"
       - "9000:9000/udp"

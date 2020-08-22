@@ -76,7 +76,9 @@ WORKDIR /root/universal-campus
 
 #COPY "universal-campus/OSAvatarsSpring2011.iar" "OSAvatarsSpring2011.iar"
 RUN cp *.oar /root/diva-r09110/bin
-RUN cp *.iar /root/diva-r09110/bin/Library
+
+#I believe the OSAvatarsSpring2011 is in the oar
+#RUN cp *.iar /root/diva-r09110/bin/Library
 #COPY "universal-campus/OSAvatarsSpring2011.iar" "OSAvatarsSpring2011.iar"
 
 #Set up for launching opensim configuration

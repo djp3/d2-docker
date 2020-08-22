@@ -4,19 +4,19 @@
     ; For this to work you need to obtain an admin account from Vivox
     ; that allows you to create voice accounts and region channels.
 
-    enabled = true
+    enabled = false
 
     ; vivox voice server
-    vivox_server = www.osp.vivox.com
+    vivox_server = www.foobar.vivox.com
 
     ; vivox SIP URI
-    vivox_sip_uri = osp.vivox.com
+    vivox_sip_uri = foobar.vivox.com
 
     ; vivox admin user name
-    vivox_admin_user = donaniii0973-admin
+    vivox_admin_user = DeepThroat
 
     ; vivox admin password
-    vivox_admin_password = 5eS00RTk
+    vivox_admin_password = VoiceG4te
 
     ; channel type: "channel" or "positional"
     ; - positional: spatial sound (default)
@@ -48,7 +48,6 @@
     ; channel max range: distance at which channel is silent
     ; - a value between 0 and 160, default is 80
     ;vivox_channel_max_range = 80
-    vivox_channel_max_range = 16
 
     ; channel clamping distance: distance before attenuation applies
     ; - a value between 0 and 160, default is 10

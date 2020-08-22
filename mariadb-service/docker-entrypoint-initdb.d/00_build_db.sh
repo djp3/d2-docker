@@ -2,7 +2,7 @@
 #This work is done by the image on build
 
 #The docker-compose file is making sure that all ip address have the same first
-# 16 bits of address, eg., 172.31.*.*
+# 16 bits of address, eg., 172.30.*.*
 
 DP_IP_DB=`host db | cut -d' ' -f4 | cut -d'.' -f1,2`
 #DP_IP_MONO=`host mono | cut -d' ' -f4 | cut -d'.' -f1,2`

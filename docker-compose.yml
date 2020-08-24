@@ -125,6 +125,10 @@ services:
     networks:
       - alpha_network
     volumes:
+      - type: bind
+        source: ./backup_storage
+        target: /root/backup_storage
+        consistency: consistent
       - type: volume
         source: file-volume-opensim
         target: /root

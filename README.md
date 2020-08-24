@@ -195,6 +195,12 @@ You might want to set the default avatars by gender. Info on that is [here](http
 
 You might want to change the logos in universal Campus.  Info on that is [here](http://uc.onikenkon.com/instruction_manual_v1.2.pdf)
 
+If you have the universal campus loaded, sometimes after the first load the terrain doesn't fully take for some reason.  For example, none of the terrain edges should look straight.  They should all go into the water naturally.  Also nothing should be floating in the air.  If you see either of these two effects, you can reload the terrain only by issues these commands to the OpenSim command prompt.  I haven't found the first is ever missing, but it's included for completeness:
+* `load oar --merge --displacement <0,0,0> --force-terrain --force-parcels universal_campus_01_0.7.3_03022012.oar`
+* `load oar --merge --displacement <0,256,0> --force-terrain --force-parcels universal_campus_02_0.7.3_03022012.oar`
+* `load oar --merge --displacement <256,0,0> --force-terrain --force-parcels universal_campus_03_0.7.3_03022012.oar`
+* `load oar --merge --displacement <256,256,0> --force-terrain --force-parcels universal_campus_04_0.7.3_03022012.oar`
+
 
 # References
 or how I made this stuff work

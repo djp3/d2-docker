@@ -51,45 +51,7 @@ services:
     environment:
       - TZ=${DP_TIME_ZONE}
 
-  #  To do a backup, make sure only backup container is running
-  #  then log in
-  #    docker-compose up backup
-  #  Find the container id with
-  #    docker ps
-  #  Attach with
-  #    docker exec -it <container_id> bash
-  #  Install pbzip2
-  #     apt update
-  #     apt install pbzip2
-  #  Backup the db
-  #     cd /root
-  #     tar cv backupdb/ | pbzip2 > backup_storage/backupdb.tar.bz2
-  #  Backup the filesystem
-  #     cd /root
-  #     tar cv backupfile/ | pbzip2 > backup_storage/backupfile.tar.bz2
-  #  Then shutdown the container and move the backups in backup storage
-  #  somewhere safe
-  #
-  #  To restore comment out the two read_only lines below and make sure 
-  #  only the backup container is running:
-  #    docker-compose up backup
-  #  Find the container id with
-  #    docker ps
-  #  Attach with
-  #    docker exec -it <container_id> bash
-  #  Install pbzip2
-  #    apt update
-  #    apt install pbzip2
-  #  Move the backup image into place on the host machine
-  #  Delete everything in the existing folders
-  #    rm -r -f backupdb/* backupfile/*
-  #  Restore images 
-  #    pbzip2 -d < backup_storage/backupdb.tar.bz2 | tar xvo
-  #    pbzip2 -d < backup_storage/backupfile.tar.bz2 | tar xvo
-  #  Shutdown the container
-  #    docker-compose down
-  #  Bring up the system
-  #    docker-compose up
+  # Instructions for backup and restore are in the README.md file
   backup:
     image: ubuntu
     volumes:

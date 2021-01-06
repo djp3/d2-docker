@@ -1,0 +1,7 @@
+#Find the docker instances that are running
+docker ps
+#Run a bash shell in a running instance
+docker exec -it ead3400aeee9 bash
+#copy a file from a container out of the container
+docker cp 6e41e2d0e35e:/root/diva-r09110/bin/2020*.oar backup_storage/
+

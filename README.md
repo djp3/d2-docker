@@ -207,14 +207,14 @@ If you want to completely rebuild the world over you can manually run then the 3
 
 To do a backup, make sure only backup container is running then log in
 
-* Start just the backup container
+* Start just the backup container (This won't release control so you will need to open another terminal for the rest of the commands)
 	* `docker-compose up backup`
 * Find the container backup container id with
 	* `docker ps`
 * Attach with
 	* `docker exec -it <container_id> bash`
 * Install pbzip2
-	* `apt update`
+	* `apt update` optionally `apt upgrade`
 	* `apt install pbzip2`
 * Backup the db
 	* `cd /root`
@@ -222,18 +222,18 @@ To do a backup, make sure only backup container is running then log in
 * Backup the filesystem
 	* `cd /root`
 	* `tar cv backupfile/ | pbzip2 > backup_storage/backupfile.tar.bz2`
-* Then shutdown the container and move the backups in the host backup_storage folder to  somewhere safe
+* Then shutdown the container and move the backups in the host backup_storage folder to somewhere safe
  
 ## Restore your world
 * To restore comment out the two read_only lines in docker-compose.yml and make sure only the backup container is running:
-* Start just the backup container
+* Start just the backup container (This won't release control so you will need to open another terminal for the rest of the commands)
 	* `docker-compose up backup`
 * Find the container backup container id with
 	* `docker ps`
 * Attach with
 	* `docker exec -it <container_id> bash`
 * Install pbzip2
-	* `apt update`
+	* `apt update` optionally `apt upgrade`
 	* `apt install pbzip2`
 * Move the backup image into place on the host machine
 * Delete everything in the existing folders
